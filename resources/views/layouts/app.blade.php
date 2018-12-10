@@ -74,6 +74,16 @@
                                     <form id="profile-form" action="{{ route('profile') }}" method="GET" style="display: none;">
                                         @csrf
                                     </form>
+
+                                    <a class="dropdown-item" href="{{ route('add-thread') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('add-thread-form').submit();">
+                                        {{ __('Add thread') }}
+                                    </a>
+
+                                    <form id="add-thread-form" action="{{ route('add-thread') }}" method="GET" style="display: none;">
+                                        @csrf
+                                    </form>
                                 </div>
                             </li>
                         @endguest

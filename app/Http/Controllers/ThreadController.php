@@ -22,9 +22,9 @@ class ThreadController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function add()
     {
-        //
+        return view('add-thread');
     }
 
     /**
@@ -35,7 +35,7 @@ class ThreadController extends Controller
      */
     public function store(Request $request)
     {
-        //
+//        return view('profile');
     }
 
     /**

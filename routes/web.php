@@ -18,4 +18,6 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/profile', 'ProfileController@profile')->name('profile');
+Route::get('/profile', 'ProfileController@profile')->name('profile')->middleware('auth');
+Route::get('/add-thread', 'ThreadController@add')->name('add-thread')->middleware('auth');
+Route::post('/create-thread', 'ThreadController@create')->name('create-thread')->middleware('auth');
