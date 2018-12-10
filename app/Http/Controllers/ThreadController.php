@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Thread;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ThreadController extends Controller
 {
@@ -35,7 +36,19 @@ class ThreadController extends Controller
      */
     public function store(Request $request)
     {
-//        return view('profile');
+        $validatedData = $request->validate([
+            'title' => 'required|min:3|max:255',
+            'content' => 'required',
+        ]);
+
+        $threadFields = array_merge($request->toArray(), [
+            'user_id' => Auth::user()->id
+        ]);
+        $thread = Thread::create($threadFields);
+
+        $thread->save();
+
+        return redirect('view-thread/' . $thread->id);
     }
 
     /**
@@ -46,7 +59,7 @@ class ThreadController extends Controller
      */
     public function show(Thread $thread)
     {
-        //
+        return view('view-thread', ['thread' => $thread]);
     }
 
     /**
