@@ -16,7 +16,6 @@ class CreateThreadResponsesTable extends Migration
         Schema::create('thread_responses', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
-            $table->longText('content');
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('thread_id');
             $table->foreign('user_id')->references('id')->on('users');
