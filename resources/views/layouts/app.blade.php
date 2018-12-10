@@ -71,7 +71,7 @@
                                         {{ __('Profile') }}
                                     </a>
 
-                                    <form id="profile-form" action="{{ route('profile') }}" method="POST" style="display: none;">
+                                    <form id="profile-form" action="{{ route('profile') }}" method="GET" style="display: none;">
                                         @csrf
                                     </form>
                                 </div>
