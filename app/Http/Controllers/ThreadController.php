@@ -38,19 +38,7 @@ class ThreadController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'title' => [
-                'required',
-                'unique:threads',
-                'min:3',
-                'max:255',
-                new NoNumbers()
-            ],
-            'content' => [
-                'max:255',
-                new DotEnd(),
-            ]
-        ]);
+        $validatedData = $this->validateThread($request);
 
         $threadFields = array_merge($request->toArray(), [
             'user_id' => Auth::user()->id
@@ -81,7 +69,7 @@ class ThreadController extends Controller
      */
     public function edit(Thread $thread)
     {
-        //
+        return view('edit-thread', ['thread' => $thread]);
     }
 
     /**
@@ -93,7 +81,13 @@ class ThreadController extends Controller
      */
     public function update(Request $request, Thread $thread)
     {
-        //
+        $validatedData = $this->validateThread($request);
+
+        $thread->title = $request->get('title');
+        $thread->content = $request->get('content');
+        $thread->save();
+
+        return view('view-thread', ['thread' => $thread]);
     }
 
     /**
@@ -104,6 +98,28 @@ class ThreadController extends Controller
      */
     public function destroy(Thread $thread)
     {
-        //
+        try{
+            $thread->delete();
+        } catch (\Exception $exception) {
+        }
+
+        return redirect('list-threads');
+    }
+
+    private function validateThread(Request $request)
+    {
+        return $request->validate([
+            'title' => [
+                'required',
+                'unique:threads',
+                'min:3',
+                'max:255',
+                new NoNumbers()
+            ],
+            'content' => [
+                'max:255',
+                new DotEnd(),
+            ]
+        ]);
     }
 }
