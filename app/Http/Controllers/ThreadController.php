@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Rules\DotEnd;
+use App\Rules\NoNumbers;
 use App\Thread;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -37,8 +39,17 @@ class ThreadController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'title' => 'required|min:3|max:255',
-            'content' => 'required',
+            'title' => [
+                'required',
+                'unique:threads',
+                'min:3',
+                'max:255',
+                new NoNumbers()
+            ],
+            'content' => [
+                'max:255',
+                new DotEnd(),
+            ]
         ]);
 
         $threadFields = array_merge($request->toArray(), [
