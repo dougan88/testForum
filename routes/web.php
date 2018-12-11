@@ -20,6 +20,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/profile', 'ProfileController@profile')->name('profile')->middleware('auth');
 Route::get('/add-thread', 'ThreadController@add')->name('add-thread')->middleware('auth');
+Route::get('/list-threads', 'ThreadController@index')->name('list-threads')->middleware('auth');
 
 Route::get('/view-thread/{thread}', 'ThreadController@show')->name('view-thread')->middleware('auth');
 Route::post('/create-thread', 'ThreadController@store')->name('create-thread')->middleware('auth');
