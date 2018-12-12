@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Events\ThreadResponseCreated;
 use Illuminate\Database\Eloquent\Model;
 
 class ThreadResponse extends Model
@@ -16,6 +17,10 @@ class ThreadResponse extends Model
         'content',
         'user_id',
         'thread_id',
+    ];
+
+    protected $dispatchesEvents = [
+        'created' => ThreadResponseCreated::class,
     ];
 
     public function thread()

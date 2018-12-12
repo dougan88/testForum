@@ -20,7 +20,7 @@
                         </div>
 
                             @foreach($thread->threadResponses as $response)
-                                <div><span style="color: orange;">{{$thread->user->name}}:</span> {{ $response->content }}</div>
+                                <div><span style="color: orange;">{{$response->user->name}}:</span> {{ $response->content }}</div>
                             @endforeach
                     </div>
                 </div>

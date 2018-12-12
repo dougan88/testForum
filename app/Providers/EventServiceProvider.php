@@ -3,7 +3,10 @@
 namespace App\Providers;
 
 use App\Events\ThreadCreated;
+use App\Events\ThreadResponseCreated;
 use App\Listeners\ThreadOnCreateDeleting;
+use App\Listeners\ThreadResponseOnCreateEmailSending;
+use App\ThreadResponse;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -22,6 +25,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         ThreadCreated::class => [
             ThreadOnCreateDeleting::class,
+        ],
+        ThreadResponseCreated::class => [
+            ThreadResponseOnCreateEmailSending::class,
         ],
     ];
 
