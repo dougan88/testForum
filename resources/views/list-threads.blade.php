@@ -16,7 +16,9 @@
                         @foreach($threads as $thread)
                             <h1>{{ $thread->title }}</h1>
                             <div>
-                                <a href="{{ route('edit-thread', ['id' => $thread->id]) }}" style="color: greenyellow">Edit</a> <a href="{{ route('delete-thread', ['id' => $thread->id]) }}" style="color: firebrick">Delete</a>
+                                <a href="{{ route('edit-thread', ['id' => $thread->id]) }}" style="color: greenyellow">Edit</a>
+                                <a href="{{ route('view-thread', ['id' => $thread->id]) }}" style="color: purple">View</a>
+                                <a href="{{ route('delete-thread', ['id' => $thread->id]) }}" style="color: firebrick">Delete</a>
                             </div>
                             <div>{{ $thread->content }}</div>
                         @endforeach
