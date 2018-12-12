@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">{{ __('View thread') }}</div>
+                    <div class="card-header">{{ __('All threads') }}</div>
 
                     <div class="card-body">
                         @if (session('status'))
@@ -13,15 +13,13 @@
                                 {{ session('status') }}
                             </div>
                         @endif
-
-                        <h5 style="color: orange;">{{ $thread->title }}</h5>
-                        <div>
-                            {{ $thread->content }}
-                        </div>
-
-                            @foreach($thread->threadResponses as $response)
-                                <div><span style="color: orange;">{{$thread->user->name}}:</span> {{ $response->content }}</div>
-                            @endforeach
+                        @foreach($threads as $thread)
+                            <h1>{{ $thread->title }}</h1>
+                            <div>
+                                <a href="{{ route('reply-thread', ['id' => $thread->id]) }}" style="color: cornflowerblue">Reply</a>
+                            </div>
+                            <div>{{ $thread->content }}</div>
+                        @endforeach
                     </div>
                 </div>
             </div>

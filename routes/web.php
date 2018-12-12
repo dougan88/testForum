@@ -18,12 +18,19 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/profile', 'ProfileController@profile')->name('profile')->middleware('auth');
-Route::get('/add-thread', 'ThreadController@add')->name('add-thread')->middleware('auth');
-Route::get('/list-threads', 'ThreadController@index')->name('list-threads')->middleware('auth');
 
-Route::get('/delete-thread/{thread}', 'ThreadController@destroy')->name('delete-thread')->middleware('auth');
-Route::get('/edit-thread/{thread}', 'ThreadController@edit')->name('edit-thread')->middleware('auth');
-Route::post('/update-thread/{thread}', 'ThreadController@update')->name('update-thread')->middleware('auth');
-Route::get('/view-thread/{thread}', 'ThreadController@show')->name('view-thread')->middleware('auth');
-Route::post('/create-thread', 'ThreadController@store')->name('create-thread')->middleware('auth');
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('/profile', 'ProfileController@profile')->name('profile');
+
+    Route::get('/add-thread', 'ThreadController@add')->name('add-thread');
+    Route::get('/list-threads', 'ThreadController@userThreads')->name('list-threads');
+    Route::get('/threads', 'ThreadController@allThreads')->name('threads');
+    Route::get('/delete-thread/{thread}', 'ThreadController@destroy')->name('delete-thread');
+    Route::get('/edit-thread/{thread}', 'ThreadController@edit')->name('edit-thread');
+    Route::post('/update-thread/{thread}', 'ThreadController@update')->name('update-thread');
+    Route::get('/view-thread/{thread}', 'ThreadController@show')->name('view-thread');
+    Route::post('/create-thread', 'ThreadController@store')->name('create-thread');
+
+    Route::get('/reply-thread/{thread}', 'ReplyController@reply')->name('reply-thread');
+    Route::post('/create-reply/{thread}', 'ReplyController@store')->name('create-reply');
+});

@@ -88,10 +88,20 @@
                                     <a class="dropdown-item" href="{{ route('list-threads') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('list-threads-form').submit();">
-                                        {{ __('All threads') }}
+                                        {{ __('My threads') }}
                                     </a>
 
                                     <form id="list-threads-form" action="{{ route('list-threads') }}" method="GET" style="display: none;">
+                                        @csrf
+                                    </form>
+
+                                    <a class="dropdown-item" href="{{ route('threads') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('threads-form').submit();">
+                                        {{ __('All threads') }}
+                                    </a>
+
+                                    <form id="threads-form" action="{{ route('threads') }}" method="GET" style="display: none;">
                                         @csrf
                                     </form>
                                 </div>

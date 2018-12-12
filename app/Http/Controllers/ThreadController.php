@@ -15,9 +15,14 @@ class ThreadController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function userThreads()
     {
-        return view('list-threads', ['threads' => Thread::orderBy('created_at', 'desc')->get()]);
+        return view('list-threads', ['threads' => Thread::where('user_id', Auth::user()->id)->orderBy('created_at', 'desc')->get()]);
+    }
+
+    public function allThreads()
+    {
+        return view('all-threads', ['threads' => Thread::orderBy('created_at', 'desc')->get()]);
     }
 
     /**
