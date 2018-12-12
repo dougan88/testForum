@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Events\ThreadCreated;
 use App\Listeners\ThreadCreating;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
@@ -22,7 +23,7 @@ class Thread extends Model
     ];
 
     protected $dispatchesEvents = [
-        'creating' => ThreadCreating::class,
+        'created' => ThreadCreated::class,
     ];
 
     public function threadResponses()
